@@ -51,6 +51,30 @@ docker-compose up -d
 
 补充说明:
 
+index.php
+
+```
+<?php
+$a = @$_GET['file'];
+echo 'include $_GET[\'file\']';
+if (strpos($a,'flag')!==false) {
+die('_POST');
+}
+include $a;
+?>
+```
+
+dir.php
+
+```
+<?php
+$a = @$_GET['dir'];
+if(!$a){
+$a = '/tmp';
+}
+var_dump(scandir($a));
+```
+
 phpinfo+LFI
 
 我们有文件包含，那么我们可以轻易的给代码写后门：
